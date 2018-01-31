@@ -64,7 +64,7 @@ function read_file($proc_id, $path, $size, $mem) {
 
 function proc_manage($path, $num, $mem) {
     $size = filesize($path);
-    $size = ceil($size / $num);
+    $size = intval($size / $num) + 1;
 
     for ($i = 1; $i <= $num; $i++) {
         $pid = pcntl_fork();
@@ -93,8 +93,7 @@ function proc_manage($path, $num, $mem) {
 function pow_of_2($num) {
     while ($num > 1) {
         if ($num % 2 == 1)  return false;
-        $num /= 2;
-        $num = floor($num);
+        $num = intval($num / 2);
     }
     if ($num == 1)  return true;
     else  return false;
